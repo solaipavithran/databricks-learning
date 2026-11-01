@@ -1,4 +1,4 @@
-CREATE OR REFRESH STREAMING TABLE orders_status_bronze_st
+CREATE OR REFRESH STREAMING TABLE status_bronze_st
 COMMENT 'Raw order status events ingested from JSON files'
 TBLPROPERTIES (
     'pipelines.reset.allowed' = 'false'
@@ -13,7 +13,7 @@ FROM STREAM (read_files(
 );
 
 
-CREATE OR REFRESH STREAMING TABLE orders_status_silver_st(
+CREATE OR REFRESH STREAMING TABLE status_silver_st(
     CONSTRAINT valid_order_id EXPECT(order_id is not null) ON VIOLATION DROP ROW
 )
 AS
